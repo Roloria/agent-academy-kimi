@@ -1,46 +1,99 @@
-# Agent Academy 智能体学院
+<div align="center">
 
-> 基于公开 GitHub 开源项目与资料整理的 AI Agent 完整学习平台 —— 从原理到实战，一站式掌握智能体开发。
+# 🎓 Agent Academy · 智能体学院
 
-## 项目简介
+**从原理到实战，走完 Agent 学习的完整周期**
 
-Agent Academy（智能体学院）是一个面向开发者与学习者的 AI Agent 学习平台。我们系统梳理了公开的开源项目、经典论文与优质学习资料，将分散的知识整合为结构化的学习路径、深入的原理解析、客观的框架横评与可上手的实战项目，帮助你从零基础成长为 Agent 开发高手。
+基于公开 GitHub 开源项目、经典论文与互联网知识库系统整理的
+**AI Agent 一站式中文学习平台**
 
-## 六大页面
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)](https://vite.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](CONTRIBUTING.md)
 
-- **首页（Home）**：平台导航与核心理念展示，一览 AI Agent 学习全景。
-- **学习路径（Learning Path）**：从入门到进阶的分阶段路线图，循序渐进掌握 Agent 核心能力。
-- **原理知识库（Principles）**：深入剖析 Agent 核心原理，包括 Agent Loop、ReAct、Function Calling、多智能体协作等关键概念与经典论文解读。
-- **框架横评（Frameworks）**：对主流 Agent 框架（LangChain、AutoGen、CrewAI 等）进行多维度客观对比，助你选型不踩坑。
-- **实战项目（Projects）**：精选开源实战项目，从简单 Demo 到生产级应用，边做边学。
-- **资源导航（Resources）**：汇总论文、教程、社区、工具等优质外部资源，构建你的 Agent 知识网络。
+</div>
 
-## 技术栈
+---
 
-- **前端框架**：React 19 + TypeScript
-- **构建工具**：Vite 7
-- **样式方案**：Tailwind CSS 3.4 + shadcn/ui
-- **动画**：GSAP + Framer Motion
-- **3D 渲染**：Three.js / React Three Fiber
-- **平滑滚动**：Lenis
+## 🤔 为什么做这个网站？
 
-## 本地运行
+学 Agent 的人很多，学明白的人很少。教程遍地都是，但它们要么只讲框架 API、要么只复述论文——**缺少一条从「LLM 基础」走到「独立交付完整 Agent 项目」的完整路径**。
 
-```bash
-# 安装依赖
-npm install
+Agent Academy 把这条路径修好了：
 
-# 启动开发服务器
-npm run dev
-
-# 构建生产版本
-npm run build
+```
+LLM 基础 → Agent 原理 → 框架深入 → 技能进阶 → 🔥 独立交付完整 Agent 项目
+ 阶段 1      阶段 2       阶段 3      阶段 4         阶段 5（Capstone）
 ```
 
-## 内容来源说明
+不是收藏夹式的链接堆砌，而是**一条有顺序、有产出、有验收的学习流水线**。每个阶段都有明确的目标、主题、资源与交付物——走完它，你将亲手造出一个可写进简历的 Agent 项目。
 
-本站内容基于公开 GitHub 开源项目、经典学术论文与公开技术资料整理归纳而成，仅供学习交流使用。所有引用内容的版权归原作者所有，如有侵权请联系删除。
+## ✨ 六大板块
 
-## License
+| 板块 | 内容 | 亮点 |
+|------|------|------|
+| 🏠 **首页** | Agent 循环图解 · 学习路径总览 | 3D 粒子 Agent 环，滚动驱动的"感知→规划→记忆→工具→行动"循环叙事 |
+| 🗺️ **学习路径** | 五阶段完整路线图（10–15 周） | 每阶段含目标/主题/精选资源/产出物，sticky 阶段导航，锚点直达 |
+| 🧠 **原理知识库** | 6 章教科书级长文 | ReAct · Plan-and-Execute · Reflexion · CoT · 记忆系统 · Function Calling · MCP · 多智能体，配工程图风格插图与 13 条可验证参考文献 |
+| ⚔️ **框架横评** | 10 大框架对比 | LangChain/LangGraph · AutoGen · CrewAI · OpenAI Agents SDK · smolagents · LlamaIndex · Semantic Kernel · Dify · Coze —— 可筛选对比表 + 最小代码示例 + 四场景选型向导 |
+| 🔥 **实战项目** | 《个人研究助理 Agent》8 步教程 | 基于 OpenAI Agents SDK：自动搜索 → 阅读 → 交叉验证 → 生成带引用的研究报告。全部代码可运行，每步配验收清单 |
+| 📚 **资源导航** | 35 条精选资源 | 8 个 awesome 仓库 · 10 门免费课程 · 9 篇经典论文 · 8 篇关键博客，可筛选 |
 
-建议采用 [MIT License](LICENSE)。
+## 🎯 内容信条
+
+- **可验证**：所有框架 GitHub 链接、star 量级、arXiv 编号、时效信息（如 2025.10 微软 Agent Framework 整合、LangChain 1.0 发布）均经联网核实
+- **不断章取义**：代码示例完整可运行，不是伪代码截图
+- **区分事实与观点**：经验性判断以「工程观点」明确标注，不冒充真理
+- **时效诚实**：框架格局 2025–2026 剧烈变化，维护状态如实标注
+
+## 🎨 设计语言
+
+深色工程美学 × 终端质感。**五语义色即知识框架**，全站一致：
+
+🟦 感知 `#38BDF8` · 🟨 规划 `#FBBF24` · 🟪 记忆 `#A78BFA` · 🟩 工具 `#34D399` · 🟥 循环 `#F472B6`
+
+R3F 粒子环 · GSAP 滚动叙事 · Framer Motion 微交互 · Lenis 平滑滚动 · JetBrains Mono 代码美学
+
+## 🚀 快速开始
+
+```bash
+git clone https://github.com/Roloria/agent-academy-kimi.git
+cd agent-academy-kimi
+npm install
+npm run dev        # 开发预览
+npm run build      # 构建到 dist/
+```
+
+## 📁 项目结构
+
+```
+src/
+├── components/        # Navbar / Footer / Layout / CodeBlock（复制/折叠/终端变体）
+├── pages/
+│   ├── home/          # 首页 8 大区块（含 R3F 粒子环）
+│   ├── path/          # 学习路径
+│   ├── principles/    # 原理知识库（6 章）
+│   ├── frameworks/    # 框架横评（对比表 + 详情卡 + 选型）
+│   ├── capstone/      # 实战教程（8 步 + 全部代码）
+│   └── resources/     # 资源导航
+└── lib/semantic.ts    # 五语义色系统
+```
+
+## 🗺️ Roadmap
+
+- [ ] **v1.1 内容增强**：MCP 专题章节 · Microsoft Agent Framework 补充 · 深色/浅色模式切换
+- [ ] **v1.2 学习闭环**：章节自测题 · 学习进度打卡（localStorage）· 结课证书生成
+- [ ] **v1.3 全栈化**：用户登录 · 进度云同步 · 笔记与讨论
+- [ ] **v2.0 交互实战**：浏览器内 Agent 演示沙盒 · 配套视频 · 英文版 i18n
+- [ ] **持续维护**：每季度复核框架数据与链接有效性
+
+## 🙏 内容来源
+
+本站内容整理自公开资料，包括但不限于：[ReAct](https://arxiv.org/abs/2210.03629) · [Reflexion](https://arxiv.org/abs/2303.11366) · [Anthropic: Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) · [Hugging Face Agents Course](https://huggingface.co/learn/agents-course) · 各框架官方文档。各框架商标归其所有者，本站仅供学习交流。
+
+## 📄 License
+
+MIT — 欢迎 Star ⭐ / Fork / 提 Issue 与 PR！
