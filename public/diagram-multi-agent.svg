@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" width="1400" height="700" fill="none" font-family="'JetBrains Mono', ui-monospace, monospace">
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="eC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38BDF8"/></marker>
+    <marker id="eP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#A78BFA"/></marker>
+    <marker id="eK" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#F472B6"/></marker>
+  </defs>
+
+  <text x="40" y="26" fill="#5C6B82" font-size="13" letter-spacing="2">FIG.05 — MULTI-AGENT TOPOLOGIES</text>
+  <text x="1360" y="26" fill="#5C6B82" font-size="13" letter-spacing="2" text-anchor="end">AGENT ACADEMY</text>
+
+  <!-- ═══ 面板 1：监督者（星型） ═══ -->
+  <rect x="40" y="44" width="620" height="296" rx="14" fill="#0B0F1A" fill-opacity="0.6" stroke="#1E293B" stroke-width="1"/>
+  <text x="64" y="76" fill="#9AA7BC" font-size="14" letter-spacing="2">01 · 监督者 SUPERVISOR</text>
+  <g stroke-width="1.5">
+    <line x1="350" y1="192" x2="350" y2="118" stroke="#38BDF8" marker-end="url(#eC)"/>
+    <line x1="350" y1="192" x2="466" y2="192" stroke="#A78BFA" marker-end="url(#eP)"/>
+    <line x1="350" y1="192" x2="350" y2="266" stroke="#F472B6" marker-end="url(#eK)"/>
+    <line x1="350" y1="192" x2="234" y2="192" stroke="#38BDF8" stroke-opacity="0.7" marker-end="url(#eC)"/>
+  </g>
+  <circle cx="350" cy="192" r="22" fill="#0B0F1A" stroke="#FBBF24" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="350" y="197" fill="#FBBF24" font-size="11" text-anchor="middle">监督</text>
+  <circle cx="350" cy="104" r="14" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5"/>
+  <circle cx="480" cy="192" r="14" fill="#0B0F1A" stroke="#A78BFA" stroke-width="1.5"/>
+  <circle cx="350" cy="280" r="14" fill="#0B0F1A" stroke="#F472B6" stroke-width="1.5"/>
+  <circle cx="220" cy="192" r="14" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="350" y="322" fill="#5C6B82" font-size="11" text-anchor="middle" letter-spacing="1">中心监督者统一分派任务</text>
+
+  <!-- ═══ 面板 2：层级（树形三层） ═══ -->
+  <rect x="740" y="44" width="620" height="296" rx="14" fill="#0B0F1A" fill-opacity="0.6" stroke="#1E293B" stroke-width="1"/>
+  <text x="764" y="76" fill="#9AA7BC" font-size="14" letter-spacing="2">02 · 层级 HIERARCHICAL</text>
+  <g stroke-width="1.5">
+    <line x1="1050" y1="118" x2="985" y2="168" stroke="#A78BFA" marker-end="url(#eP)"/>
+    <line x1="1050" y1="118" x2="1115" y2="168" stroke="#38BDF8" marker-end="url(#eC)"/>
+    <line x1="985" y1="196" x2="950" y2="240" stroke="#F472B6" marker-end="url(#eK)"/>
+    <line x1="985" y1="196" x2="1020" y2="240" stroke="#38BDF8" marker-end="url(#eC)"/>
+    <line x1="1115" y1="196" x2="1150" y2="240" stroke="#A78BFA" marker-end="url(#eP)"/>
+  </g>
+  <circle cx="1050" cy="104" r="16" fill="#0B0F1A" stroke="#FBBF24" stroke-width="1.5" filter="url(#glow)"/>
+  <circle cx="985" cy="182" r="14" fill="#0B0F1A" stroke="#A78BFA" stroke-width="1.5"/>
+  <circle cx="1115" cy="182" r="14" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5"/>
+  <circle cx="950" cy="254" r="12" fill="#0B0F1A" stroke="#F472B6" stroke-width="1.5"/>
+  <circle cx="1020" cy="254" r="12" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5"/>
+  <circle cx="1150" cy="254" r="12" fill="#0B0F1A" stroke="#A78BFA" stroke-width="1.5"/>
+  <text x="1050" y="322" fill="#5C6B82" font-size="11" text-anchor="middle" letter-spacing="1">管理者逐层委派子任务</text>
+
+  <!-- ═══ 面板 3：辩论（双节点往返） ═══ -->
+  <rect x="40" y="364" width="620" height="296" rx="14" fill="#0B0F1A" fill-opacity="0.6" stroke="#1E293B" stroke-width="1"/>
+  <text x="64" y="396" fill="#9AA7BC" font-size="14" letter-spacing="2">03 · 辩论 DEBATE</text>
+  <path d="M280 500 C330 470 380 470 428 500" stroke="#38BDF8" stroke-width="1.5" fill="none" marker-end="url(#eC)"/>
+  <path d="M428 544 C380 574 330 574 280 544" stroke="#F472B6" stroke-width="1.5" fill="none" marker-end="url(#eK)"/>
+  <circle cx="256" cy="522" r="22" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="256" y="527" fill="#38BDF8" font-size="11" text-anchor="middle">正方</text>
+  <circle cx="452" cy="522" r="22" fill="#0B0F1A" stroke="#F472B6" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="452" y="527" fill="#F472B6" font-size="11" text-anchor="middle">反方</text>
+  <line x1="354" y1="586" x2="354" y2="556" stroke="#A78BFA" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#eP)"/>
+  <circle cx="354" cy="602" r="14" fill="#0B0F1A" stroke="#A78BFA" stroke-width="1.5"/>
+  <text x="386" y="606" fill="#A78BFA" font-size="11">裁判</text>
+  <text x="354" y="442" fill="#5C6B82" font-size="11" text-anchor="middle" letter-spacing="1">多轮交锋后由裁判收敛结论</text>
+
+  <!-- ═══ 面板 4：群体（随机网络） ═══ -->
+  <rect x="740" y="364" width="620" height="296" rx="14" fill="#0B0F1A" fill-opacity="0.6" stroke="#1E293B" stroke-width="1"/>
+  <text x="764" y="396" fill="#9AA7BC" font-size="14" letter-spacing="2">04 · 群体 SWARM</text>
+  <g stroke="#334155" stroke-width="1">
+    <line x1="820" y1="450" x2="900" y2="480"/><line x1="900" y1="480" x2="980" y2="452"/>
+    <line x1="980" y1="452" x2="1060" y2="486"/><line x1="1060" y1="486" x2="1140" y2="452"/>
+    <line x1="820" y1="450" x2="860" y2="540"/><line x1="900" y1="480" x2="860" y2="540"/>
+    <line x1="900" y1="480" x2="970" y2="556"/><line x1="980" y1="452" x2="970" y2="556"/>
+    <line x1="1060" y1="486" x2="970" y2="556"/><line x1="1060" y1="486" x2="1070" y2="552"/>
+    <line x1="1140" y1="452" x2="1070" y2="552"/><line x1="860" y1="540" x2="970" y2="556"/>
+    <line x1="970" y1="556" x2="1070" y2="552"/><line x1="980" y1="452" x2="900" y2="480"/>
+    <line x1="820" y1="450" x2="980" y2="452"/><line x1="1060" y1="486" x2="1140" y2="452"/>
+  </g>
+  <circle cx="820" cy="450" r="13" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5"/>
+  <circle cx="900" cy="480" r="13" fill="#0B0F1A" stroke="#A78BFA" stroke-width="1.5" filter="url(#glow)"/>
+  <circle cx="980" cy="452" r="13" fill="#0B0F1A" stroke="#F472B6" stroke-width="1.5"/>
+  <circle cx="1060" cy="486" r="13" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5" filter="url(#glow)"/>
+  <circle cx="1140" cy="452" r="13" fill="#0B0F1A" stroke="#A78BFA" stroke-width="1.5"/>
+  <circle cx="860" cy="540" r="13" fill="#0B0F1A" stroke="#F472B6" stroke-width="1.5"/>
+  <circle cx="970" cy="556" r="13" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5"/>
+  <circle cx="1070" cy="552" r="13" fill="#0B0F1A" stroke="#A78BFA" stroke-width="1.5"/>
+  <text x="980" y="622" fill="#5C6B82" font-size="11" text-anchor="middle" letter-spacing="1">对等节点自由协作，无中心</text>
+</svg>

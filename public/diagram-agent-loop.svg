@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" fill="none" font-family="'JetBrains Mono', ui-monospace, monospace">
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowSoft" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.28"/>
+      <stop offset="55%" stop-color="#38BDF8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arrC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38BDF8"/></marker>
+    <marker id="arrA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#FBBF24"/></marker>
+    <marker id="arrP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#A78BFA"/></marker>
+    <marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#34D399"/></marker>
+    <marker id="arrK" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#F472B6"/></marker>
+  </defs>
+
+  <!-- 工程图纸装饰：角标与刻度 -->
+  <g stroke="#1E293B" stroke-width="1">
+    <path d="M40 60 V40 H60"/><path d="M1160 40 H1140 V60"/>
+    <path d="M40 615 V635 H60"/><path d="M1160 635 H1140 V615"/>
+  </g>
+  <text x="60" y="32" fill="#5C6B82" font-size="13" letter-spacing="2">FIG.01 — AGENT LOOP</text>
+  <text x="1140" y="32" fill="#5C6B82" font-size="13" letter-spacing="2" text-anchor="end">PERCEIVE → ACT</text>
+  <text x="60" y="660" fill="#5C6B82" font-size="12" letter-spacing="1.5">SCALE 1:1 · CLOCKWISE CYCLE</text>
+  <text x="1140" y="660" fill="#5C6B82" font-size="12" letter-spacing="1.5" text-anchor="end">AGENT ACADEMY</text>
+
+  <!-- 参考同心圆与十字线 -->
+  <circle cx="600" cy="337" r="282" stroke="#1E293B" stroke-width="1" stroke-dasharray="2 6"/>
+  <circle cx="600" cy="337" r="140" stroke="#1E293B" stroke-width="1" stroke-dasharray="2 6"/>
+  <line x1="600" y1="30" x2="600" y2="70" stroke="#1E293B" stroke-width="1"/>
+  <line x1="600" y1="604" x2="600" y2="644" stroke="#1E293B" stroke-width="1"/>
+  <line x1="300" y1="337" x2="340" y2="337" stroke="#1E293B" stroke-width="1"/>
+  <line x1="860" y1="337" x2="900" y2="337" stroke="#1E293B" stroke-width="1"/>
+
+  <!-- 中心 LLM 决策核心 -->
+  <circle cx="600" cy="337" r="118" fill="url(#coreGrad)"/>
+  <circle cx="600" cy="337" r="70" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5" filter="url(#glow)"/>
+  <circle cx="600" cy="337" r="58" stroke="#38BDF8" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="3 5"/>
+  <text x="600" y="330" fill="#E8EDF5" font-size="24" font-weight="600" text-anchor="middle" letter-spacing="1">LLM</text>
+  <text x="600" y="356" fill="#9AA7BC" font-size="14" text-anchor="middle" letter-spacing="3">决策核心</text>
+
+  <!-- 五段流动虚线弧（顺时针闭环） -->
+  <g fill="none" stroke-width="1.5" stroke-dasharray="7 7" stroke-linecap="round">
+    <path d="M650.8 133.2 A210 210 0 0 1 778.1 225.7" stroke="#38BDF8" marker-end="url(#arrC)"/>
+    <path d="M809.5 322.3 A210 210 0 0 1 760.9 472.0" stroke="#FBBF24" marker-end="url(#arrA)"/>
+    <path d="M678.7 531.7 A210 210 0 0 1 521.3 531.7" stroke="#A78BFA" marker-end="url(#arrP)"/>
+    <path d="M439.1 472.0 A210 210 0 0 1 390.5 322.3" stroke="#34D399" marker-end="url(#arrG)"/>
+    <path d="M421.9 225.7 A210 210 0 0 1 549.2 133.2" stroke="#F472B6" marker-end="url(#arrK)"/>
+  </g>
+
+  <!-- 节点 01 感知（青）顶部 -->
+  <g>
+    <circle cx="600" cy="127" r="34" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5" filter="url(#glow)"/>
+    <g stroke="#38BDF8" stroke-width="1.5" fill="none">
+      <path d="M586 127 Q600 113 614 127 Q600 141 586 127 Z"/>
+      <circle cx="600" cy="127" r="4.5"/>
+    </g>
+    <text x="600" y="76" fill="#38BDF8" font-size="14" text-anchor="middle" letter-spacing="2">01 · 感知 PERCEPTION</text>
+    <line x1="600" y1="86" x2="600" y2="92" stroke="#38BDF8" stroke-opacity="0.5" stroke-width="1"/>
+  </g>
+
+  <!-- 节点 02 规划（琥珀）右上 -->
+  <g>
+    <circle cx="799.8" cy="272.1" r="34" fill="#0B0F1A" stroke="#FBBF24" stroke-width="1.5" filter="url(#glow)"/>
+    <g stroke="#FBBF24" stroke-width="1.5" fill="none">
+      <path d="M799.8 258.5 a11 11 0 0 1 6 20.2 v3.4 h-12 v-3.4 a11 11 0 0 1 6-20.2 Z"/>
+      <line x1="795.8" y1="286.5" x2="803.8" y2="286.5"/>
+    </g>
+    <text x="870" y="240" fill="#FBBF24" font-size="14" letter-spacing="2">02 · 规划 PLANNING</text>
+    <line x1="838" y1="250" x2="830" y2="256" stroke="#FBBF24" stroke-opacity="0.5" stroke-width="1"/>
+  </g>
+
+  <!-- 节点 03 记忆（紫）右下 -->
+  <g>
+    <circle cx="723.5" cy="506.9" r="34" fill="#0B0F1A" stroke="#A78BFA" stroke-width="1.5" filter="url(#glow)"/>
+    <g stroke="#A78BFA" stroke-width="1.5" fill="none">
+      <ellipse cx="723.5" cy="498.4" rx="11" ry="4.5"/>
+      <path d="M712.5 498.4 v17 c0 2.5 4.9 4.5 11 4.5 s11-2 11-4.5 v-17"/>
+      <path d="M712.5 507 c0 2.5 4.9 4.5 11 4.5 s11-2 11-4.5"/>
+    </g>
+    <text x="800" y="556" fill="#A78BFA" font-size="14" letter-spacing="2">03 · 记忆 MEMORY</text>
+    <line x1="768" y1="542" x2="756" y2="534" stroke="#A78BFA" stroke-opacity="0.5" stroke-width="1"/>
+  </g>
+
+  <!-- 节点 04 工具（绿）左下 -->
+  <g>
+    <circle cx="476.5" cy="506.9" r="34" fill="#0B0F1A" stroke="#34D399" stroke-width="1.5" filter="url(#glow)"/>
+    <g stroke="#34D399" stroke-width="1.5" fill="none">
+      <path d="M485.5 494.9 a8 8 0 0 0-10.4 10.4 l-8.6 8.6 a3.5 3.5 0 1 0 5 5 l8.6-8.6 a8 8 0 0 0 10.4-10.4 l-5.2 5.2 -4.5-1.2 -1.2-4.5 z"/>
+    </g>
+    <text x="400" y="556" fill="#34D399" font-size="14" text-anchor="end" letter-spacing="2">04 · 工具 TOOLS</text>
+    <line x1="432" y1="542" x2="444" y2="534" stroke="#34D399" stroke-opacity="0.5" stroke-width="1"/>
+  </g>
+
+  <!-- 节点 05 行动（粉）左上 -->
+  <g>
+    <circle cx="400.2" cy="272.1" r="34" fill="#0B0F1A" stroke="#F472B6" stroke-width="1.5" filter="url(#glow)"/>
+    <path d="M405.5 256.6 L392.2 274.6 h7.3 l-4.8 15.5 13.8-18.5 h-7.4 l4.4-15 z" fill="none" stroke="#F472B6" stroke-width="1.5" stroke-linejoin="round"/>
+    <text x="330" y="240" fill="#F472B6" font-size="14" text-anchor="end" letter-spacing="2">05 · 行动 ACTION</text>
+    <line x1="362" y1="250" x2="370" y2="256" stroke="#F472B6" stroke-opacity="0.5" stroke-width="1"/>
+  </g>
+</svg>

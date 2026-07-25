@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" fill="none" font-family="'JetBrains Mono', ui-monospace, monospace">
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="mG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#34D399"/></marker>
+    <marker id="mC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38BDF8"/></marker>
+    <marker id="mA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#FBBF24"/></marker>
+  </defs>
+
+  <!-- 角标 -->
+  <g stroke="#1E293B" stroke-width="1">
+    <path d="M40 28 V16 H52"/><path d="M1160 16 H1148 V28"/>
+    <path d="M40 532 V544 H52"/><path d="M1160 544 H1148 V532"/>
+  </g>
+  <text x="52" y="12" fill="#5C6B82" font-size="12" letter-spacing="2">FIG.04 — FUNCTION CALLING SEQUENCE</text>
+
+  <!-- 三条泳道 -->
+  <g>
+    <rect x="120" y="36" width="200" height="46" rx="10" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="220" y="65" fill="#E8EDF5" font-size="14" text-anchor="middle" letter-spacing="2">开发者代码</text>
+    <rect x="500" y="36" width="200" height="46" rx="10" fill="#0B0F1A" stroke="#FBBF24" stroke-width="1.5" filter="url(#glow)"/>
+    <text x="600" y="65" fill="#E8EDF5" font-size="14" text-anchor="middle" letter-spacing="2">LLM</text>
+    <rect x="880" y="36" width="200" height="46" rx="10" fill="#0B0F1A" stroke="#34D399" stroke-width="1.5"/>
+    <text x="980" y="65" fill="#E8EDF5" font-size="14" text-anchor="middle" letter-spacing="2">外部函数</text>
+  </g>
+
+  <!-- 生命线 -->
+  <g stroke="#334155" stroke-width="1" stroke-dasharray="4 5">
+    <line x1="220" y1="82" x2="220" y2="548"/>
+    <line x1="600" y1="82" x2="600" y2="548"/>
+    <line x1="980" y1="82" x2="980" y2="548"/>
+  </g>
+
+  <!-- 激活条 -->
+  <rect x="214" y="118" width="12" height="400" rx="3" fill="#111827" stroke="#38BDF8" stroke-opacity="0.4" stroke-width="1"/>
+  <rect x="594" y="150" width="12" height="112" rx="3" fill="#111827" stroke="#FBBF24" stroke-opacity="0.4" stroke-width="1"/>
+  <rect x="974" y="306" width="12" height="84" rx="3" fill="#111827" stroke="#34D399" stroke-opacity="0.4" stroke-width="1"/>
+  <rect x="594" y="436" width="12" height="82" rx="3" fill="#111827" stroke="#FBBF24" stroke-opacity="0.4" stroke-width="1"/>
+
+  <!-- 消息线 -->
+  <g stroke-width="1.5" fill="none">
+    <line x1="226" y1="140" x2="592" y2="140" stroke="#34D399" marker-end="url(#mG)"/>
+    <text x="410" y="128" fill="#34D399" font-size="13" text-anchor="middle">① 注册工具（JSON Schema）</text>
+
+    <line x1="226" y1="205" x2="592" y2="205" stroke="#38BDF8" marker-end="url(#mC)"/>
+    <text x="410" y="193" fill="#38BDF8" font-size="13" text-anchor="middle">② 用户提问 prompt</text>
+
+    <line x1="594" y1="268" x2="228" y2="268" stroke="#FBBF24" marker-end="url(#mA)"/>
+    <text x="410" y="256" fill="#FBBF24" font-size="13" text-anchor="middle">③ 输出 tool_call（name + args）</text>
+
+    <line x1="226" y1="330" x2="972" y2="330" stroke="#34D399" marker-end="url(#mG)"/>
+    <text x="600" y="318" fill="#34D399" font-size="13" text-anchor="middle">④ 执行函数 fn(args)</text>
+
+    <line x1="974" y1="395" x2="228" y2="395" stroke="#38BDF8" stroke-dasharray="6 5" marker-end="url(#mC)"/>
+    <text x="600" y="383" fill="#38BDF8" font-size="13" text-anchor="middle">⑤ 返回 result</text>
+
+    <line x1="226" y1="458" x2="592" y2="458" stroke="#38BDF8" marker-end="url(#mC)"/>
+    <text x="410" y="446" fill="#38BDF8" font-size="13" text-anchor="middle">⑥ 提交结果给模型</text>
+
+    <line x1="594" y1="518" x2="228" y2="518" stroke="#FBBF24" marker-end="url(#mA)"/>
+    <text x="410" y="506" fill="#FBBF24" font-size="13" text-anchor="middle">⑦ 最终回答 final answer</text>
+  </g>
+</svg>
