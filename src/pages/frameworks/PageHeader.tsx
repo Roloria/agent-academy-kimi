@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { AlertTriangle, ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 import { Badge } from "@/components/ui-extra";
-import { SEMANTIC } from "@/lib/semantic";
+import { SEMANTIC, semanticAlpha } from "@/lib/semantic";
 
 const TITLE_A = "十把兵器，";
 const TITLE_B = "该选哪一把";
@@ -16,7 +16,7 @@ export default function PageHeader() {
         aria-hidden
         className="pointer-events-none absolute -top-24 left-1/2 h-[480px] w-[720px] -translate-x-1/2 rounded-full"
         style={{
-          background: `radial-gradient(closest-side, ${SEMANTIC.tool}14, transparent)`,
+          background: `radial-gradient(closest-side, ${semanticAlpha(SEMANTIC.tool, 8)}, transparent)`,
         }}
       />
       <div className="relative mx-auto max-w-prose2 px-6 max-md:px-5">
@@ -30,7 +30,7 @@ export default function PageHeader() {
         </nav>
 
         <Badge color={SEMANTIC.tool} className="mb-5">
-          10 个框架 · 数据核实于 2026 年中
+          11 个框架 · 数据核实于 2026 年中
         </Badge>
 
         {/* h1：word stagger */}
@@ -85,9 +85,11 @@ export default function PageHeader() {
           <AlertTriangle size={18} className="mt-0.5 shrink-0 text-c-plan" />
           <p className="text-body-sm text-text-secondary">
             <strong className="font-semibold text-c-plan">格局变动：</strong>
-            微软 2025.10 推出统一的 Microsoft Agent Framework（AutoGen 与 Semantic Kernel
-            进入维护模式）；LangChain/LangGraph 2025.10.22 联合发布 1.0；OpenAI Swarm 已于
-            2025.3 归档，由 Agents SDK 接替。
+            微软 2025.10 推出统一的 Microsoft Agent Framework，
+            <strong className="font-semibold text-text-primary">2026.4.3 发布 1.0 GA</strong>
+            （AutoGen 与 Semantic Kernel 进入维护模式，MAF
+            成为微软唯一长期投资方向）；LangChain/LangGraph 2025.10.22 联合发布 1.0；OpenAI
+            Swarm 已于 2025.3 归档，由 Agents SDK 接替。
           </p>
         </motion.div>
       </div>

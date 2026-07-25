@@ -13,6 +13,7 @@ const FILTERS: { key: FilterKey; label: string }[] = [
   { key: "lowcode", label: "低代码平台" },
   { key: "multi", label: "多智能体" },
   { key: "maintenance", label: "维护模式" },
+  { key: "msft", label: "微软系" },
 ];
 
 /** S2. 速览对比表（可筛选，点击行跳转详情卡） */
@@ -30,7 +31,7 @@ export default function CompareTable() {
         <SectionHeading
           tag="COMPARE"
           tagColor={SEMANTIC.tool}
-          title="十框架速览对比"
+          title="十一框架速览对比"
           lead="点击任意一行，直达该框架的详情卡（含最小可运行示例）。"
         />
 
@@ -92,7 +93,15 @@ export default function CompareTable() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.25, delay: i * 0.05 }}
                     onClick={() => scrollToId(r.target)}
-                    className="cursor-pointer border-b border-border-subtle transition-colors last:border-0 hover:bg-bg-2"
+                    className={cn(
+                      "cursor-pointer border-b border-border-subtle transition-colors last:border-0 hover:bg-bg-2",
+                      r.pinned && "bg-bg-2/40",
+                    )}
+                    style={
+                      r.pinned
+                        ? { boxShadow: `inset 2px 0 0 ${SEMANTIC.perceive}` }
+                        : undefined
+                    }
                   >
                     <td className="whitespace-nowrap px-4 py-3.5 font-medium text-text-primary">
                       {r.name}
@@ -104,13 +113,24 @@ export default function CompareTable() {
                     <td className="px-4 py-3.5 text-text-secondary">{r.feature}</td>
                     <td className="px-4 py-3.5 text-text-secondary">{r.audience}</td>
                     <td className="whitespace-nowrap px-4 py-3.5">
-                      <span
-                        className="inline-flex items-center rounded-md border px-2 py-0.5 font-mono text-xs"
-                        style={semanticStyle(
-                          r.status.tone === "green" ? SEMANTIC.tool : SEMANTIC.plan,
-                        )}
-                      >
-                        {r.status.label}
+                      <span className="inline-flex items-center gap-1.5">
+                        <span
+                          className="inline-flex items-center rounded-md border px-2 py-0.5 font-mono text-xs"
+                          style={semanticStyle(
+                            r.status.tone === "green" ? SEMANTIC.tool : SEMANTIC.plan,
+                          )}
+                        >
+                          {r.status.label}
+                        </span>
+                        {r.extraStatus?.map((b) => (
+                          <span
+                            key={b.label}
+                            className="inline-flex items-center rounded-md border px-2 py-0.5 font-mono text-xs"
+                            style={semanticStyle(b.color)}
+                          >
+                            {b.label}
+                          </span>
+                        ))}
                       </span>
                     </td>
                     <td className="whitespace-nowrap px-4 py-3.5">
