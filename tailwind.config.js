@@ -5,30 +5,44 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Agent Academy 设计 token（design.md §2）
+        // Agent Academy 设计 token（v2-design.md §1：全部引用 CSS 变量，支持深/浅双主题）。
+        // 注：颜色走 RGB 通道变量（--*-ch）以兼容 /opacity 修饰符；
+        // 完整 hex 变量（--*）仍保留，供渐变、color-mix 与内联样式使用。
         bg: {
-          0: "#070A12",
-          1: "#0B0F1A",
-          2: "#111827",
-          3: "#1A2333",
+          0: "rgb(var(--bg-0-ch) / <alpha-value>)",
+          1: "rgb(var(--bg-1-ch) / <alpha-value>)",
+          2: "rgb(var(--bg-2-ch) / <alpha-value>)",
+          3: "rgb(var(--bg-3-ch) / <alpha-value>)",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        "border-subtle": "#1E293B",
-        "border-strong": "#334155",
-        "text-primary": "#E8EDF5",
-        "text-secondary": "#9AA7BC",
-        "text-tertiary": "#5C6B82",
+        "border-subtle": "rgb(var(--border-subtle-ch) / <alpha-value>)",
+        "border-strong": "rgb(var(--border-strong-ch) / <alpha-value>)",
+        "text-primary": "rgb(var(--text-primary-ch) / <alpha-value>)",
+        "text-secondary": "rgb(var(--text-secondary-ch) / <alpha-value>)",
+        "text-tertiary": "rgb(var(--text-tertiary-ch) / <alpha-value>)",
         // Agent 五组件语义色
-        "c-perceive": "#38BDF8",
-        "c-plan": "#FBBF24",
-        "c-memory": "#A78BFA",
-        "c-tool": "#34D399",
-        "c-loop": "#F472B6",
-        "accent-2": "#A78BFA",
+        "c-perceive": "rgb(var(--c-perceive-ch) / <alpha-value>)",
+        "c-plan": "rgb(var(--c-plan-ch) / <alpha-value>)",
+        "c-memory": "rgb(var(--c-memory-ch) / <alpha-value>)",
+        "c-tool": "rgb(var(--c-tool-ch) / <alpha-value>)",
+        "c-loop": "rgb(var(--c-loop-ch) / <alpha-value>)",
+        "accent-2": "rgb(var(--accent-2-ch) / <alpha-value>)",
+        // 固定深色面板（两主题一致：代码块/终端/工程图容器）
+        panel: {
+          DEFAULT: "rgb(var(--panel-bg-ch) / <alpha-value>)",
+          2: "rgb(var(--panel-bg-2-ch) / <alpha-value>)",
+          border: "rgb(var(--panel-border-ch) / <alpha-value>)",
+          text: {
+            DEFAULT: "rgb(var(--panel-text-ch) / <alpha-value>)",
+            2: "rgb(var(--panel-text-2-ch) / <alpha-value>)",
+            3: "rgb(var(--panel-text-3-ch) / <alpha-value>)",
+          },
+          accent: "rgb(var(--panel-accent-ch) / <alpha-value>)",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -46,7 +60,7 @@ module.exports = {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "#38BDF8",
+          DEFAULT: "rgb(var(--accent-ch) / <alpha-value>)",
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
@@ -57,16 +71,16 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // 代码语法高亮（design.md §2.3）
+        // 代码语法高亮（v2-design.md §1.2，两主题一致）
         syn: {
-          keyword: "#C792EA",
-          string: "#C3E88D",
-          func: "#82AAFF",
-          comment: "#546E7A",
-          number: "#F78C6C",
-          decorator: "#FBBF24",
-          variable: "#E8EDF5",
-          success: "#34D399",
+          keyword: "rgb(var(--syn-keyword-ch) / <alpha-value>)",
+          string: "rgb(var(--syn-string-ch) / <alpha-value>)",
+          func: "rgb(var(--syn-fn-ch) / <alpha-value>)",
+          comment: "rgb(var(--syn-comment-ch) / <alpha-value>)",
+          number: "rgb(var(--syn-num-ch) / <alpha-value>)",
+          decorator: "rgb(var(--syn-tag-ch) / <alpha-value>)",
+          variable: "rgb(var(--syn-var-ch) / <alpha-value>)",
+          success: "rgb(var(--syn-ok-ch) / <alpha-value>)",
         },
       },
       fontFamily: {
@@ -102,8 +116,9 @@ module.exports = {
         "glow-cyan": "0 8px 24px rgba(56,189,248,.25)",
       },
       backgroundImage: {
-        "grad-main": "linear-gradient(135deg, #38BDF8, #A78BFA)",
-        "grad-semantics": "linear-gradient(90deg, #38BDF8, #FBBF24, #A78BFA, #34D399, #F472B6)",
+        "grad-main": "linear-gradient(135deg, var(--c-perceive), var(--c-memory))",
+        "grad-semantics":
+          "linear-gradient(90deg, var(--c-perceive), var(--c-plan), var(--c-memory), var(--c-tool), var(--c-loop))",
       },
       keyframes: {
         "accordion-down": {
