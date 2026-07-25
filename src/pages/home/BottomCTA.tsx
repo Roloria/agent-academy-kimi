@@ -15,7 +15,7 @@ export default function BottomCTA() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(50% 60% at 50% 50%, rgba(56,189,248,.07), transparent 65%), radial-gradient(35% 45% at 65% 60%, rgba(167,139,250,.06), transparent 70%)",
+            "radial-gradient(50% 60% at 50% 50%, color-mix(in srgb, var(--c-perceive) 7%, transparent), transparent 65%), radial-gradient(35% 45% at 65% 60%, color-mix(in srgb, var(--c-memory) 6%, transparent), transparent 70%)",
         }}
         aria-hidden
       />
@@ -53,9 +53,9 @@ export default function BottomCTA() {
           <motion.div
             animate={{
               boxShadow: [
-                "0 0 24px rgba(56,189,248,.20)",
-                "0 0 44px rgba(56,189,248,.38)",
-                "0 0 24px rgba(56,189,248,.20)",
+                "0 0 24px color-mix(in srgb, var(--c-perceive) 20%, transparent)",
+                "0 0 44px color-mix(in srgb, var(--c-perceive) 38%, transparent)",
+                "0 0 24px color-mix(in srgb, var(--c-perceive) 20%, transparent)",
               ],
             }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

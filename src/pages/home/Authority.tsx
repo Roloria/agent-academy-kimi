@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { BookOpen, GraduationCap, FileText, Library, Newspaper, Star } from "lucide-react";
 import { ExternalLinkCard, Reveal, SectionHeading } from "@/components/ui-extra";
+import { SEMANTIC } from "@/lib/semantic";
 
 /**
  * S6. 数据与权威背书 —— 「站在公开知识的肩膀上」
@@ -88,7 +89,7 @@ export default function Authority() {
         <div>
           <SectionHeading
             tag="06 · 来源"
-            tagColor="#38BDF8"
+            tagColor={SEMANTIC.perceive}
             title={
               <>
                 全部内容基于

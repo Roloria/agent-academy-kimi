@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { Check, RotateCcw } from "lucide-react";
 import { Badge, Reveal } from "@/components/ui-extra";
 import { cn } from "@/lib/utils";
+import { SEMANTIC } from "@/lib/semantic";
 
 /**
  * S7. Capstone 预告 —— 终端逐行打印演示（内容取自 learning-path brief §三）
@@ -67,22 +68,22 @@ function TerminalDemo() {
   return (
     <div
       ref={boxRef}
-      className="group relative overflow-hidden rounded-xl border border-border-subtle bg-bg-2"
+      className="group relative overflow-hidden rounded-xl border border-panel-border bg-panel"
     >
       {/* 顶栏 */}
-      <div className="flex items-center justify-between border-b border-border-subtle bg-bg-1/60 px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-panel-border bg-panel-2/60 px-4 py-2.5">
         <div className="flex items-center gap-3">
           <span className="flex items-center gap-1.5">
             <i className="h-3 w-3 rounded-full" style={{ background: "#FF5F57" }} />
             <i className="h-3 w-3 rounded-full" style={{ background: "#FEBC2E" }} />
             <i className="h-3 w-3 rounded-full" style={{ background: "#28C840" }} />
           </span>
-          <span className="font-mono text-xs text-text-tertiary">terminal</span>
+          <span className="font-mono text-xs text-panel-text-3">terminal</span>
         </div>
         <button
           type="button"
           onClick={play}
-          className="flex items-center gap-1 rounded-md px-2 py-1 font-mono text-xs text-text-tertiary opacity-0 transition-all hover:bg-bg-3 hover:text-c-perceive group-hover:opacity-100"
+          className="flex items-center gap-1 rounded-md px-2 py-1 font-mono text-xs text-panel-text-3 opacity-0 transition-all hover:bg-panel-2 hover:text-panel-accent group-hover:opacity-100"
         >
           <RotateCcw size={12} /> 重放
         </button>
@@ -98,12 +99,16 @@ function TerminalDemo() {
             )}
             style={{
               color:
-                l.kind === "ok" ? "#34D399" : l.kind === "cmd" ? "#E8EDF5" : "#9AA7BC",
+                l.kind === "ok"
+                  ? "var(--syn-ok)"
+                  : l.kind === "cmd"
+                    ? "var(--panel-text)"
+                    : "var(--panel-text-2)",
             }}
           >
             {l.kind === "cmd" ? (
               <>
-                <span style={{ color: "#38BDF8" }}>$</span>
+                <span style={{ color: "var(--panel-accent)" }}>$</span>
                 {l.text.slice(1)}
               </>
             ) : (
@@ -132,7 +137,7 @@ export default function Capstone() {
         {/* 右：文字 */}
         <div>
           <Reveal>
-            <Badge color="#F472B6" className="mb-4">
+            <Badge color={SEMANTIC.loop} className="mb-4">
               CAPSTONE
             </Badge>
             <h2 className="text-h2 font-bold text-text-primary">
