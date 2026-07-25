@@ -8,6 +8,7 @@ import * as THREE from "three";
  * +200 游离粒子；60s/圈极慢旋转；鼠标视差；加载淡入。
  */
 
+// 粒子颜色不随主题变化（亮色守恒例外，light-mode.md §3.7）
 const SEMANTIC_COLORS = ["#38BDF8", "#FBBF24", "#A78BFA", "#34D399", "#F472B6"];
 
 function makePositions(count: number, ring: boolean) {

@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Hero from "@/pages/home/Hero";
+import SiteTour from "@/pages/home/SiteTour";
 import AgentLoop from "@/pages/home/AgentLoop";
 import Compare from "@/pages/home/Compare";
 import PathOverview from "@/pages/home/PathOverview";
@@ -42,6 +43,7 @@ export default function Home() {
     <>
       <ProgressBar />
       <Hero />
+      <SiteTour />
       <AgentLoop />
       <Compare />
       <PathOverview />

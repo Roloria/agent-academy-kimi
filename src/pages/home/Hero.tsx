@@ -14,7 +14,7 @@ const BADGE_TEXT = "AGENT = LLM + 规划 + 记忆 + 工具";
 const STATS = [
   { target: 5, suffix: "", label: "个学习阶段" },
   { target: 15, prefix: "10–", label: "周完整周期" },
-  { target: 10, suffix: "", label: "大框架横评" },
+  { target: 11, suffix: "", label: "大框架横评" },
   { target: 8, suffix: "", label: "步实战教程" },
 ] as const;
 
@@ -139,7 +139,7 @@ export default function Hero() {
         className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%]"
         style={{
           background:
-            "radial-gradient(60% 100% at 50% 100%, rgba(56,189,248,0.06), transparent 70%)",
+            "radial-gradient(60% 100% at 50% 100%, color-mix(in srgb, var(--c-perceive) 6%, transparent), transparent 70%)",
         }}
         aria-hidden
       />

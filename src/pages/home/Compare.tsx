@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { MessageSquare, Workflow, RefreshCcw } from "lucide-react";
 import { SectionHeading } from "@/components/ui-extra";
 import { cn } from "@/lib/utils";
+import { SEMANTIC } from "@/lib/semantic";
 
 /**
  * S3. 与 Chatbot 的区别 —— 三段对比（数据取自 principles brief §1）
@@ -50,7 +51,7 @@ export default function Compare() {
       <div className="mx-auto max-w-content px-6 max-md:px-5">
         <SectionHeading
           tag="03 · 对比"
-          tagColor="#A78BFA"
+          tagColor={SEMANTIC.memory}
           title="它不只是聊天机器人"
         />
         <div className="grid gap-6 md:grid-cols-3">
@@ -70,9 +71,14 @@ export default function Compare() {
                 className={cn(
                   "group relative rounded-2xl border bg-bg-1 p-6 transition-all duration-[250ms] hover:-translate-y-1.5",
                   c.highlight
-                    ? "border-c-perceive/70 shadow-[0_0_40px_rgba(56,189,248,.08)] hover:border-c-perceive"
+                    ? "border-c-perceive/70 hover:border-c-perceive"
                     : "border-border-subtle hover:border-border-strong",
                 )}
+                style={
+                  c.highlight
+                    ? { boxShadow: "0 0 40px color-mix(in srgb, var(--c-perceive) 8%, transparent)" }
+                    : undefined
+                }
               >
                 {c.highlight && (
                   <>
@@ -83,7 +89,7 @@ export default function Compare() {
                       className="pointer-events-none absolute inset-0 rounded-2xl"
                       style={{
                         background:
-                          "radial-gradient(70% 50% at 50% 0%, rgba(56,189,248,.07), transparent 70%)",
+                          "radial-gradient(70% 50% at 50% 0%, color-mix(in srgb, var(--c-perceive) 7%, transparent), transparent 70%)",
                       }}
                     />
                   </>

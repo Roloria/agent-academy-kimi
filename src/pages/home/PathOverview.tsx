@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Badge, SectionHeading } from "@/components/ui-extra";
+import { SEMANTIC, semanticAlpha } from "@/lib/semantic";
 
 /**
  * S4. 学习路径总览 —— 五阶段 · 10–15 周（数据取自 learning-path brief §一）
@@ -10,7 +11,7 @@ const STAGES = [
   {
     n: 1,
     name: "基础",
-    color: "#38BDF8",
+    color: SEMANTIC.perceive,
     topics: "LLM 基础、提示工程、API 调用",
     weeks: "1–2 周",
     output: "命令行 Chatbot",
@@ -18,7 +19,7 @@ const STAGES = [
   {
     n: 2,
     name: "原理",
-    color: "#FBBF24",
+    color: SEMANTIC.plan,
     topics: "Agent 架构、ReAct、规划与记忆",
     weeks: "1–2 周",
     output: '手写 50 行"裸 Agent 循环"',
@@ -26,7 +27,7 @@ const STAGES = [
   {
     n: 3,
     name: "框架",
-    color: "#34D399",
+    color: SEMANTIC.tool,
     topics: "深入 LangGraph 或 OpenAI Agents SDK",
     weeks: "2–3 周",
     output: "用框架重写裸 Agent + 真实工具",
@@ -34,7 +35,7 @@ const STAGES = [
   {
     n: 4,
     name: "技能进阶",
-    color: "#A78BFA",
+    color: SEMANTIC.memory,
     topics: "RAG、工具设计、记忆、评估与调试",
     weeks: "3–4 周",
     output: "带 RAG + 记忆的问答 Agent + 评估报告",
@@ -42,7 +43,7 @@ const STAGES = [
   {
     n: 5,
     name: "实战",
-    color: "#F472B6",
+    color: SEMANTIC.loop,
     topics: "独立完成完整 Agent 项目",
     weeks: "3–4 周",
     output: "《个人研究助理 Agent》完整仓库 + 演示 + 复盘",
@@ -55,7 +56,7 @@ export default function PathOverview() {
       <div className="mx-auto max-w-content px-6 max-md:px-5">
         <SectionHeading
           tag="04 · 路线图"
-          tagColor="#FBBF24"
+          tagColor={SEMANTIC.plan}
           title={
             <>
               五阶段 · <span className="font-display text-grad">10–15</span> 周
@@ -104,7 +105,7 @@ export default function PathOverview() {
                   />
                   <span
                     className="pointer-events-none absolute -right-2 -top-4 font-display text-5xl font-bold"
-                    style={{ color: `${s.color}33` }}
+                    style={{ color: semanticAlpha(s.color, 20) }}
                     aria-hidden
                   >
                     {s.n}

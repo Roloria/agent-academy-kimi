@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { Eye, Lightbulb, Database, Wrench, Zap } from "lucide-react";
 import { Quote } from "@/components/ui-extra";
 import { cn } from "@/lib/utils";
+import { SEMANTIC, semanticAlpha } from "@/lib/semantic";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -16,7 +17,7 @@ const STEPS = [
     id: "01",
     name: "感知 Perception",
     en: "PERCEPTION",
-    color: "#38BDF8",
+    color: SEMANTIC.perceive,
     icon: Eye,
     desc: "接收用户指令、工具返回结果与环境状态，作为模型输入。",
   },
@@ -24,7 +25,7 @@ const STEPS = [
     id: "02",
     name: "规划 Planning",
     en: "PLANNING",
-    color: "#FBBF24",
+    color: SEMANTIC.plan,
     icon: Lightbulb,
     desc: "分解目标、制定步骤、自我反思与纠错。",
   },
@@ -32,7 +33,7 @@ const STEPS = [
     id: "03",
     name: "记忆 Memory",
     en: "MEMORY",
-    color: "#A78BFA",
+    color: SEMANTIC.memory,
     icon: Database,
     desc: "短期记忆保存会话上下文，长期记忆跨会话存储知识。",
   },
@@ -40,7 +41,7 @@ const STEPS = [
     id: "04",
     name: "工具 Tools",
     en: "TOOLS",
-    color: "#34D399",
+    color: SEMANTIC.tool,
     icon: Wrench,
     desc: "函数调用、API、代码执行、搜索等外部能力。",
   },
@@ -48,7 +49,7 @@ const STEPS = [
     id: "05",
     name: "行动 Action",
     en: "ACTION",
-    color: "#F472B6",
+    color: SEMANTIC.loop,
     icon: Zap,
     desc: "输出结构化指令执行工具或回复用户，结果重新进入感知，形成闭环。",
   },
@@ -98,8 +99,8 @@ export default function AgentLoop() {
                 className="inline-flex items-center gap-2 rounded-md border px-2.5 py-1 font-mono text-xs uppercase tracking-[0.12em]"
                 style={{
                   color: current.color,
-                  borderColor: `${current.color}4D`,
-                  backgroundColor: `${current.color}1A`,
+                  borderColor: semanticAlpha(current.color, 30),
+                  backgroundColor: semanticAlpha(current.color, 10),
                   animation: "loopTagIn 250ms ease-out",
                 }}
               >
@@ -134,8 +135,8 @@ export default function AgentLoop() {
                         className="rounded-lg border p-1.5"
                         style={{
                           color: s.color,
-                          borderColor: `${s.color}4D`,
-                          backgroundColor: `${s.color}14`,
+                          borderColor: semanticAlpha(s.color, 30),
+                          backgroundColor: semanticAlpha(s.color, 8),
                         }}
                       >
                         <Icon size={16} />
@@ -166,7 +167,7 @@ export default function AgentLoop() {
               <div
                 className="absolute inset-0 transition-all duration-700"
                 style={{
-                  background: `radial-gradient(45% 45% at 50% 50%, ${current.color}14, transparent 70%)`,
+                  background: `radial-gradient(45% 45% at 50% 50%, ${semanticAlpha(current.color, 8)}, transparent 70%)`,
                 }}
                 aria-hidden
               />
@@ -176,7 +177,7 @@ export default function AgentLoop() {
                 className="relative w-full transition-transform duration-700"
                 style={{
                   transform: allDone ? "scale(1.03)" : `scale(${1 + active * 0.012})`,
-                  filter: `drop-shadow(0 0 ${12 + active * 6}px ${current.color}33)`,
+                  filter: `drop-shadow(0 0 ${12 + active * 6}px ${semanticAlpha(current.color, 20)})`,
                 }}
               />
               <p className="mt-3 text-center font-mono text-caption text-text-tertiary">

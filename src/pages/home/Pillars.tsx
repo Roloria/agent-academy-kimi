@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { CircleDot, Table2, TerminalSquare } from "lucide-react";
 import { SectionHeading } from "@/components/ui-extra";
+import { SEMANTIC, semanticAlpha } from "@/lib/semantic";
 
 /**
  * S5. 三大内容支柱 —— 「学什么，都在这里」
@@ -10,7 +11,7 @@ const PILLARS = [
   {
     id: "01",
     title: "原理知识库",
-    color: "#FBBF24",
+    color: SEMANTIC.plan,
     icon: CircleDot,
     desc: "从 ReAct 到 Reflexion，从记忆系统到 MCP 协议与多智能体协作——用「通俗解释 + 关键要点 + 伪代码」三段式讲透 Agent 的内部机制。",
     stats: "6 大章节 · 5 种推理范式 · 13 条可验证来源",
@@ -20,17 +21,17 @@ const PILLARS = [
   {
     id: "02",
     title: "框架横评",
-    color: "#34D399",
+    color: SEMANTIC.tool,
     icon: Table2,
-    desc: "LangChain/LangGraph、OpenAI Agents SDK、CrewAI、smolagents、Dify、Coze……10 大主流框架的定位、优缺点、最小代码示例与场景化选型建议。",
-    stats: "10 个框架 · 真实 GitHub 数据 · 4 类选型场景",
+    desc: "LangChain/LangGraph、OpenAI Agents SDK、CrewAI、smolagents、Dify、Coze、Microsoft Agent Framework……11 大主流框架的定位、优缺点、最小代码示例与场景化选型建议。",
+    stats: "11 个框架 · 真实 GitHub 数据 · 4 类选型场景",
     cta: "查看横评",
     to: "/frameworks",
   },
   {
     id: "03",
     title: "实战项目",
-    color: "#F472B6",
+    color: SEMANTIC.loop,
     icon: TerminalSquare,
     desc: "8 个步骤、全部真实可运行代码，用 OpenAI Agents SDK 构建《个人研究助理 Agent》：自动规划、搜索、阅读、综合，生成带引用的研究报告。",
     stats: "8 步教程 · 3+ 工具 · 含评估与部署",
@@ -45,7 +46,7 @@ export default function Pillars() {
       <div className="mx-auto max-w-content px-6 max-md:px-5">
         <SectionHeading
           tag="05 · 内容模块"
-          tagColor="#34D399"
+          tagColor={SEMANTIC.tool}
           title="学什么，都在这里"
         />
         <div className="grid gap-6 lg:grid-cols-3">
@@ -82,8 +83,8 @@ export default function Pillars() {
                   className="mt-5 inline-flex w-fit rounded-xl border p-3"
                   style={{
                     color: p.color,
-                    borderColor: `${p.color}4D`,
-                    backgroundColor: `${p.color}14`,
+                    borderColor: semanticAlpha(p.color, 30),
+                    backgroundColor: semanticAlpha(p.color, 8),
                   }}
                 >
                   <Icon size={24} />
