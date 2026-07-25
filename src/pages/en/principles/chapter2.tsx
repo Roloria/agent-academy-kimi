@@ -40,7 +40,7 @@ for trial in range(max_trials):
 const PARADIGMS: { name: string; desc: string; arxiv: string; anchor: string }[] = [
   { name: "ReAct", desc: "Reasoning and acting interleaved: think—act—observe—think again", arxiv: "2210.03629", anchor: "#react" },
   { name: "Plan-and-Execute", desc: "Plan first, execute next, re-plan when needed", arxiv: "2305.04091", anchor: "#plan-and-execute" },
-  { name: "Reflexion", desc: "After failure, write an “error notebook” — verbalized reflection", arxiv: "2303.11366", anchor: "#reflexion" },
+  { name: "Reflexion", desc: "After failure, write an \u201cerror notebook\u201d — verbalized reflection", arxiv: "2303.11366", anchor: "#reflexion" },
   { name: "Chain-of-Thought (CoT)", desc: "Lay the scratch paper out flat and reason step by step", arxiv: "2201.11903", anchor: "#cot" },
 ];
 
