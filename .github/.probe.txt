@@ -1,1 +1,0 @@
-probe .github dir write
