@@ -1,0 +1,93 @@
+/*
+ * Sandbox 页作用域样式（design/v2/sandbox.md）。
+ * 工作台为「固定深色面板」（v2-design.md §1.3：浅色模式下保持深色），
+ * 因此面板内部的阶段语义色必须主题不变——与 --syn-* / --panel-accent 同理。
+ * 这里通过别名复用已有的主题不变变量，仅在调色板中没有对应固定变量时
+ * （写作粉 = --c-loop 深色值）显式固定，避免浅色模式下深色面板对比度不足。
+ */
+.sandbox-scope {
+  /* 面板内阶段色（主题不变，别名到既有固定变量） */
+  --ph-plan: var(--syn-tag); /* 规划琥珀 = --c-plan 深色值 #FBBF24 */
+  --ph-search: var(--syn-ok); /* 搜索绿 = --c-tool 深色值 #34D399 */
+  --ph-read: var(--panel-accent); /* 阅读青 = --c-perceive 深色值 #38BDF8 */
+  --ph-write: #f472b6; /* 写作粉 = --c-loop 深色值（无既有固定别名，固定之） */
+  --ph-input: var(--panel-text-2);
+}
+
+/* 打字光标：1px 块状，530ms 闪烁（§3.2） */
+@keyframes sb-caret {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0;
+  }
+}
+.sb-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: var(--panel-text);
+  animation: sb-caret 530ms step-end infinite;
+}
+
+/* 工具 running spinner：1s/圈（§3.2） */
+@keyframes sb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.sb-spinner {
+  animation: sb-spin 1s linear infinite;
+}
+
+/* 模拟演示主徽章：琥珀呼吸光晕 2s yoyo（S1，提醒性质，不可关闭） */
+@keyframes sb-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--c-plan) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 18px 2px color-mix(in srgb, var(--c-plan) 45%, transparent);
+  }
+}
+.sb-breathe {
+  animation: sb-breathe 2s ease-in-out infinite;
+}
+
+/* 面板内徽章呼吸（写作粉，用于「下一步」按钮等待态） */
+@keyframes sb-breathe-panel {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ph-write) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 16px 2px color-mix(in srgb, var(--ph-write) 50%, transparent);
+  }
+}
+.sb-breathe-panel {
+  animation: sb-breathe-panel 1.6s ease-in-out infinite;
+}
+
+/* 报告 Tab 自动切换时的一次性轻提示（§2.3） */
+@keyframes sb-tab-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ph-write) 60%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 10px color-mix(in srgb, var(--ph-write) 0%, transparent);
+  }
+}
+.sb-tab-pulse {
+  animation: sb-tab-pulse 900ms ease-out 2;
+}
+
+/* 轨迹流条目性能优化（动效预算：content-visibility auto） */
+.sb-entry {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
+}
