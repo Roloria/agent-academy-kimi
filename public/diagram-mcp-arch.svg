@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 760" width="1400" height="760" fill="none" font-family="'JetBrains Mono', ui-monospace, monospace">
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="mC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#38BDF8"/></marker>
+    <marker id="mG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#34D399"/></marker>
+  </defs>
+
+  <!-- 角标 -->
+  <g stroke="#1E293B" stroke-width="1">
+    <path d="M40 36 V24 H52"/><path d="M1360 24 H1348 V36"/>
+    <path d="M40 724 V736 H52"/><path d="M1360 736 H1348 V724"/>
+  </g>
+  <text x="52" y="20" fill="#5C6B82" font-size="13" letter-spacing="2">FIG.MCP-01 — HOST / CLIENT / SERVER ARCHITECTURE</text>
+  <text x="1348" y="20" fill="#5C6B82" font-size="13" letter-spacing="2" text-anchor="end">JSON-RPC 2.0</text>
+
+  <!-- ============ 顶层：Host 泳道面板 ============ -->
+  <rect x="120" y="60" width="1160" height="270" rx="16" fill="#0B0F1A" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="152" y="98" fill="#38BDF8" font-size="15" letter-spacing="3">HOST（宿主应用）</text>
+  <text x="1248" y="98" fill="#5C6B82" font-size="13" text-anchor="end">Claude Desktop / Cursor / VS Code / 你的 Agent</text>
+
+  <!-- Host 内部三个 Client -->
+  <g>
+    <rect x="220" y="130" width="260" height="150" rx="12" fill="#111827" stroke="#38BDF8" stroke-opacity="0.7" stroke-width="1.5"/>
+    <text x="350" y="196" fill="#E8EDF5" font-size="15" text-anchor="middle" letter-spacing="2">Client 1</text>
+    <text x="350" y="226" fill="#5C6B82" font-size="12" text-anchor="middle">1:1 协议端</text>
+
+    <rect x="570" y="130" width="260" height="150" rx="12" fill="#111827" stroke="#38BDF8" stroke-opacity="0.7" stroke-width="1.5"/>
+    <text x="700" y="196" fill="#E8EDF5" font-size="15" text-anchor="middle" letter-spacing="2">Client 2</text>
+    <text x="700" y="226" fill="#5C6B82" font-size="12" text-anchor="middle">握手 · 能力协商</text>
+
+    <rect x="920" y="130" width="260" height="150" rx="12" fill="#111827" stroke="#38BDF8" stroke-opacity="0.7" stroke-width="1.5"/>
+    <text x="1050" y="196" fill="#E8EDF5" font-size="15" text-anchor="middle" letter-spacing="2">Client 3</text>
+    <text x="1050" y="226" fill="#5C6B82" font-size="12" text-anchor="middle">JSON-RPC 请求</text>
+  </g>
+
+  <!-- Host 泳道职责注记 -->
+  <text x="152" y="308" fill="#5C6B82" font-size="12.5">管理 LLM 会话 · 用户授权界面 · 为每个 Server 创建一个 Client</text>
+
+  <!-- ============ 中层：三条传输连线 ============ -->
+  <g stroke-width="1.5">
+    <line x1="350" y1="330" x2="350" y2="452" stroke="#34D399" marker-end="url(#mG)"/>
+    <line x1="700" y1="330" x2="700" y2="452" stroke="#38BDF8" stroke-dasharray="2 0" marker-end="url(#mC)"/>
+    <line x1="1050" y1="330" x2="1050" y2="452" stroke="#34D399" marker-end="url(#mG)"/>
+  </g>
+  <!-- 传输标注牌 -->
+  <g>
+    <rect x="290" y="376" width="120" height="34" rx="8" fill="#0D1320" stroke="#34D399" stroke-opacity="0.5"/>
+    <text x="350" y="398" fill="#34D399" font-size="13" text-anchor="middle">stdio</text>
+
+    <rect x="606" y="376" width="188" height="34" rx="8" fill="#0D1320" stroke="#38BDF8" stroke-opacity="0.5"/>
+    <text x="700" y="398" fill="#38BDF8" font-size="13" text-anchor="middle">Streamable HTTP</text>
+
+    <rect x="990" y="376" width="120" height="34" rx="8" fill="#0D1320" stroke="#34D399" stroke-opacity="0.5"/>
+    <text x="1050" y="398" fill="#34D399" font-size="13" text-anchor="middle">stdio</text>
+  </g>
+
+  <!-- ============ 底层：三个 Server ============ -->
+  <g>
+    <rect x="200" y="460" width="300" height="170" rx="12" fill="#0B0F1A" stroke="#34D399" stroke-width="1.5" filter="url(#glow)"/>
+    <text x="350" y="512" fill="#34D399" font-size="15" text-anchor="middle" letter-spacing="2">SERVER</text>
+    <text x="350" y="546" fill="#E8EDF5" font-size="15" text-anchor="middle">filesystem</text>
+    <text x="350" y="578" fill="#5C6B82" font-size="12" text-anchor="middle">本地子进程</text>
+
+    <rect x="550" y="460" width="300" height="170" rx="12" fill="#0B0F1A" stroke="#34D399" stroke-width="1.5"/>
+    <text x="700" y="512" fill="#34D399" font-size="15" text-anchor="middle" letter-spacing="2">SERVER</text>
+    <text x="700" y="546" fill="#E8EDF5" font-size="15" text-anchor="middle">远程 GitHub</text>
+    <text x="700" y="578" fill="#5C6B82" font-size="12" text-anchor="middle">远程 HTTP 服务</text>
+
+    <rect x="900" y="460" width="300" height="170" rx="12" fill="#0B0F1A" stroke="#34D399" stroke-width="1.5"/>
+    <text x="1050" y="512" fill="#34D399" font-size="15" text-anchor="middle" letter-spacing="2">SERVER</text>
+    <text x="1050" y="546" fill="#E8EDF5" font-size="15" text-anchor="middle">你写的工具</text>
+    <text x="1050" y="578" fill="#5C6B82" font-size="12" text-anchor="middle">Tools / Resources / Prompts</text>
+  </g>
+
+  <!-- 底部注记 -->
+  <text x="700" y="700" fill="#5C6B82" font-size="13" text-anchor="middle">Server 不需要知道模型是谁 · 模型也不需要知道 Server 怎么实现 —— 协议在中间做翻译</text>
+</svg>
