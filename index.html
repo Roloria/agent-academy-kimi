@@ -3,10 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // 主题防闪烁：React 挂载前读取 localStorage，默认深色（v2-design.md §1.1）
+      (function () {
+        try {
+          var t = localStorage.getItem("aa-theme");
+          if (t !== "light" && t !== "dark") t = "dark";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
     <meta name="description" content="Agent Academy 智能体学院——基于公开 GitHub 开源项目、经典论文与互联网知识库，系统学习 AI Agent 的工作原理、主流框架与核心技能，走完完整学习周期，独立交付一个完整 Agent 项目。" />
     <meta property="og:title" content="智能体学院 Agent Academy" />
     <meta property="og:description" content="从原理到实战，走完 Agent 学习的完整周期。" />
-    <meta property="og:image" content="/og-cover.svg" />
+    <meta property="og:image" content="/og-cover.png" />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
