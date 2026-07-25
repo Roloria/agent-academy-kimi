@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Check, Copy, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/providers/use-language";
 
 /**
  * CodeBlock —— 全站核心代码块组件（design.md §5.3）
@@ -27,13 +28,13 @@ interface Token {
 }
 
 const TOKEN_COLOR: Record<TokenType, string> = {
-  keyword: "#C792EA",
-  string: "#C3E88D",
-  comment: "#546E7A",
-  number: "#F78C6C",
-  func: "#82AAFF",
-  decorator: "#FBBF24",
-  plain: "#E8EDF5",
+  keyword: "var(--syn-keyword)",
+  string: "var(--syn-string)",
+  comment: "var(--syn-comment)",
+  number: "var(--syn-num)",
+  func: "var(--syn-fn)",
+  decorator: "var(--syn-tag)",
+  plain: "var(--syn-var)",
 };
 
 const PY_KEYWORDS = new Set(
@@ -100,6 +101,8 @@ export default function CodeBlock({
   maxLines = 28,
   className,
 }: CodeBlockProps) {
+  const { lang: uiLang } = useLanguage();
+  const isEn = uiLang === "en";
   const [copied, setCopied] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const isTerminal = type === "terminal";
@@ -129,37 +132,37 @@ export default function CodeBlock({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-xl border border-border-subtle bg-bg-2",
+        "overflow-hidden rounded-xl border border-panel-border bg-panel",
         className,
       )}
     >
       {/* 顶栏 */}
-      <div className="flex items-center justify-between border-b border-border-subtle bg-bg-1/60 px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-panel-border bg-panel-2/60 px-4 py-2.5">
         <div className="flex items-center gap-3 min-w-0">
           <span className="flex shrink-0 items-center gap-1.5">
             <i className="h-3 w-3 rounded-full" style={{ background: "#FF5F57" }} />
             <i className="h-3 w-3 rounded-full" style={{ background: "#FEBC2E" }} />
             <i className="h-3 w-3 rounded-full" style={{ background: "#28C840" }} />
           </span>
-          <span className="truncate font-mono text-xs text-text-tertiary">{title}</span>
+          <span className="truncate font-mono text-xs text-panel-text-3">{title}</span>
         </div>
         <div className="flex shrink-0 items-center gap-3">
-          <span className="font-mono text-[11px] uppercase tracking-widest text-text-tertiary">
+          <span className="font-mono text-[11px] uppercase tracking-widest text-panel-text-3">
             {isTerminal ? "bash" : language}
           </span>
           <button
             type="button"
             onClick={handleCopy}
-            aria-label="复制代码"
+            aria-label={isEn ? "Copy code" : "复制代码"}
             className={cn(
               "flex items-center gap-1.5 rounded-md px-2 py-1 font-mono text-xs transition-all duration-150 active:scale-95",
               copied
-                ? "text-c-tool"
-                : "text-text-tertiary hover:bg-bg-3 hover:text-text-primary",
+                ? "text-syn-success"
+                : "text-panel-text-3 hover:bg-panel-2 hover:text-panel-text",
             )}
           >
             {copied ? <Check size={13} /> : <Copy size={13} />}
-            {copied ? "已复制" : "复制"}
+            {copied ? (isEn ? "Copied" : "已复制") : (isEn ? "Copy" : "复制")}
           </button>
         </div>
       </div>
@@ -186,12 +189,16 @@ export default function CodeBlock({
                     <span
                       className="whitespace-pre"
                       style={{
-                        color: success ? "#34D399" : prompt ? "#E8EDF5" : "#9AA7BC",
+                        color: success
+                          ? "var(--syn-ok)"
+                          : prompt
+                            ? "var(--panel-text)"
+                            : "var(--panel-text-2)",
                       }}
                     >
                       {prompt ? (
                         <>
-                          <span style={{ color: "#38BDF8" }}>$</span>
+                          <span style={{ color: "var(--panel-accent)" }}>$</span>
                           {line.slice(line.indexOf("$") + 1)}
                         </>
                       ) : (
@@ -206,7 +213,7 @@ export default function CodeBlock({
                   {lineNums && (
                     <span
                       aria-hidden
-                      className="w-12 shrink-0 select-none pr-4 text-right text-text-tertiary"
+                      className="w-12 shrink-0 select-none pr-4 text-right text-panel-text-3"
                     >
                       {i + 1}
                     </span>
@@ -230,7 +237,7 @@ export default function CodeBlock({
               ))}
         </pre>
         {collapsible && !expanded && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-bg-2 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-panel to-transparent" />
         )}
       </div>
 
@@ -239,7 +246,7 @@ export default function CodeBlock({
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="flex w-full items-center justify-center gap-1.5 border-t border-border-subtle bg-bg-1/60 py-2 font-mono text-xs text-text-secondary transition-colors hover:text-c-perceive"
+          className="flex w-full items-center justify-center gap-1.5 border-t border-panel-border bg-panel-2/60 py-2 font-mono text-xs text-panel-text-2 transition-colors hover:text-panel-accent"
         >
           {expanded ? (
             <>
@@ -262,7 +269,7 @@ export function ReplayButton({ onClick }: { onClick: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="flex items-center gap-1 rounded-md px-2 py-1 font-mono text-xs text-text-tertiary transition-colors hover:bg-bg-3 hover:text-c-perceive"
+      className="flex items-center gap-1 rounded-md px-2 py-1 font-mono text-xs text-panel-text-3 transition-colors hover:bg-panel-2 hover:text-panel-accent"
     >
       <RotateCcw size={12} /> 重放
     </button>
