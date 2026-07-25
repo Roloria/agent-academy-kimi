@@ -1,1 +1,300 @@
-__PATCH_CSS__
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* shadcn 变量映射到暗色设计 token */
+    --background: 222 43% 5%;
+    --foreground: 216 33% 94%;
+    --card: 222 40% 7%;
+    --card-foreground: 216 33% 94%;
+    --popover: 222 40% 7%;
+    --popover-foreground: 216 33% 94%;
+    --primary: 199 89% 60%;
+    --primary-foreground: 222 43% 5%;
+    --secondary: 220 39% 11%;
+    --secondary-foreground: 216 33% 94%;
+    --muted: 220 39% 11%;
+    --muted-foreground: 217 17% 55%;
+    --accent: 220 39% 11%;
+    --accent-foreground: 216 33% 94%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 199 89% 60%;
+    --radius: 0.625rem;
+
+    /* ============ 主题变量 —— Dark（默认，= v1 色板，v2-design.md §1.2） ============ */
+    /* 每个 token 同时定义 hex 值（--*，供渐变/color-mix/内联样式）
+       与 RGB 通道值（--*-ch，供 Tailwind /opacity 修饰符） */
+    /* 背景层级 */
+    --bg-0: #070a12; /* 页面最底层 */
+    --bg-0-ch: 7 10 18;
+    --bg-1: #0b0f1a; /* 区块/卡片底 */
+    --bg-1-ch: 11 15 26;
+    --bg-2: #111827; /* 抬升卡片/悬停态 */
+    --bg-2-ch: 17 24 39;
+    --bg-3: #1a2333; /* 最高浮层 */
+    --bg-3-ch: 26 35 51;
+    /* 描边 */
+    --border-subtle: #1e293b;
+    --border-subtle-ch: 30 41 59;
+    --border-strong: #334155;
+    --border-strong-ch: 51 65 85;
+    /* 文字 */
+    --text-primary: #e8edf5;
+    --text-primary-ch: 232 237 245;
+    --text-secondary: #9aa7bc;
+    --text-secondary-ch: 154 167 188;
+    --text-tertiary: #5c6b82;
+    --text-tertiary-ch: 92 107 130;
+    /* 语义五色（Agent 五组件） */
+    --c-perceive: #38bdf8;
+    --c-perceive-ch: 56 189 248;
+    --c-plan: #fbbf24;
+    --c-plan-ch: 251 191 36;
+    --c-memory: #a78bfa;
+    --c-memory-ch: 167 139 250;
+    --c-tool: #34d399;
+    --c-tool-ch: 52 211 153;
+    --c-loop: #f472b6;
+    --c-loop-ch: 244 114 182;
+    --accent: var(--c-perceive);
+    --accent-ch: var(--c-perceive-ch);
+    --accent-2: var(--c-memory);
+    --accent-2-ch: var(--c-memory-ch);
+    /* 装饰 */
+    --grid-line: #1e293b; /* texture-grid 线色 */
+    --noise-opacity: 0.04; /* hero-noise 叠加透明度 */
+    --glow-opacity: 0.08; /* 章节光晕透明度 */
+    --navbar-bg: rgba(7, 10, 18, 0.8); /* Navbar 毛玻璃底色 */
+    --navbar-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); /* Navbar 滚动阴影 */
+    --card-shadow: none; /* 深色用描边不用投影 */
+    --overlay-scrim: rgba(4, 6, 12, 0.72); /* 抽屉/灯箱遮罩 */
+
+    /* —— 固定深色面板（两主题共用，浅色模式下不覆盖） —— */
+    --panel-bg: #0d1320; /* 代码块/终端/SVG 容器底 */
+    --panel-bg-ch: 13 19 32;
+    --panel-bg-2: #131b2c; /* 面板内抬升区（终端标题栏、工具卡） */
+    --panel-bg-2-ch: 19 27 44;
+    --panel-border: #263349;
+    --panel-border-ch: 38 51 73;
+    --panel-text: #e8edf5;
+    --panel-text-ch: 232 237 245;
+    --panel-text-2: #9aa7bc;
+    --panel-text-2-ch: 154 167 188;
+    --panel-text-3: #5c6b82;
+    --panel-text-3-ch: 92 107 130;
+    --panel-accent: #38bdf8; /* 面板内青色强调（终端 $ 提示符等） */
+    --panel-accent-ch: 56 189 248;
+    /* 语法高亮（两主题一致，v1 §2.3） */
+    --syn-keyword: #c792ea;
+    --syn-keyword-ch: 199 146 234;
+    --syn-string: #c3e88d;
+    --syn-string-ch: 195 232 141;
+    --syn-fn: #82aaff;
+    --syn-fn-ch: 130 170 255;
+    --syn-comment: #546e7a;
+    --syn-comment-ch: 84 110 122;
+    --syn-num: #f78c6c;
+    --syn-num-ch: 247 140 108;
+    --syn-tag: #fbbf24;
+    --syn-tag-ch: 251 191 36;
+    --syn-var: #e8edf5;
+    --syn-var-ch: 232 237 245;
+    --syn-ok: #34d399;
+    --syn-ok-ch: 52 211 153;
+  }
+
+  /* ============ [data-theme="light"] —— 浅色（light-mode.md §2） ============ */
+  [data-theme="light"] {
+    --bg-0: #f4f6fa;
+    --bg-0-ch: 244 246 250;
+    --bg-1: #ffffff;
+    --bg-1-ch: 255 255 255;
+    --bg-2: #edf1f7;
+    --bg-2-ch: 237 241 247;
+    --bg-3: #e0e7f1;
+    --bg-3-ch: 224 231 241;
+    --border-subtle: #d8e0ec;
+    --border-subtle-ch: 216 224 236;
+    --border-strong: #b7c4d8;
+    --border-strong-ch: 183 196 216;
+    --text-primary: #0e1626;
+    --text-primary-ch: 14 22 38;
+    --text-secondary: #45536b;
+    --text-secondary-ch: 69 83 107;
+    --text-tertiary: #75859E;
+    --text-tertiary-ch: 117 133 158;
+    /* 语义五色加深版（白底对比度 ≥ 4.5:1） */
+    --c-perceive: #0284c7;
+    --c-perceive-ch: 2 132 199;
+    --c-plan: #b45309;
+    --c-plan-ch: 180 83 9;
+    --c-memory: #7c3aed;
+    --c-memory-ch: 124 58 237;
+    --c-tool: #047857;
+    --c-tool-ch: 4 120 87;
+    --c-loop: #db2777;
+    --c-loop-ch: 219 39 119;
+    --grid-line: #e2e9f2;
+    --noise-opacity: 0.025;
+    --glow-opacity: 0.1;
+    --navbar-bg: rgba(255, 255, 255, 0.78);
+    --navbar-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+    --card-shadow: 0 1px 2px rgba(15, 23, 42, 0.05),
+      0 8px 24px -8px rgba(15, 23, 42, 0.08);
+    --overlay-scrim: rgba(15, 23, 42, 0.42);
+    /* --panel-* 与 --syn-* 不覆盖 → 代码块/终端/工程图容器在浅色下保持深色面板 */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg-0 text-text-primary font-sans antialiased;
+    font-size: 16.5px;
+    line-height: 1.8;
+  }
+
+  /* 主题切换过渡：仅在切换后 300ms 内通过 .theme-anim 启用（v2-design.md §1.1） */
+  .theme-anim body,
+  .theme-anim body *:not(canvas):not(video):not(img) {
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease !important;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--c-perceive) 25%, transparent);
+    color: var(--text-primary);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-0);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: 6px;
+    border: 2px solid var(--bg-0);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--border-strong);
+  }
+
+  /* 行内代码 */
+  code:not(pre code) {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 13.5px;
+    background: var(--bg-2);
+    color: var(--c-perceive);
+    border-radius: 2px;
+    padding: 0.1em 0.35em;
+  }
+
+  a {
+    @apply transition-colors;
+  }
+}
+
+@layer components {
+  /* 渐变文字（标题关键词）：浅色下端点自动跟随加深版语义色（light-mode.md §3.5） */
+  .text-grad {
+    background: linear-gradient(135deg, var(--c-perceive), var(--c-memory));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* 工程网格平铺背景 */
+  .bg-grid-texture {
+    background-image: url("/texture-grid.svg");
+    background-size: 192px 192px;
+  }
+
+  /* 全页噪点叠加 */
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    pointer-events: none;
+    background-image: url("/hero-noise.svg");
+    background-size: 512px 512px;
+    opacity: var(--noise-opacity);
+  }
+
+  /* Primary 渐变描边胶囊按钮 */
+  .btn-outline-grad {
+    position: relative;
+    border-radius: 9999px;
+    background: var(--bg-1);
+    border: 1.5px solid transparent;
+    background-image: linear-gradient(var(--bg-1), var(--bg-1)),
+      linear-gradient(135deg, var(--c-perceive), var(--c-memory));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: var(--card-shadow);
+    transition: transform 250ms ease-out, box-shadow 250ms ease-out,
+      background-color 250ms ease-out;
+  }
+  .btn-outline-grad:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px
+      color-mix(in srgb, var(--c-perceive) 25%, transparent);
+  }
+
+  /* Solid 主 CTA 实心渐变（深色：亮端点；浅色：中间值端点，light-mode.md §3.5） */
+  .btn-solid-grad {
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #38bdf8, #a78bfa);
+    color: #fff;
+    transition: filter 250ms ease-out, transform 250ms ease-out,
+      box-shadow 250ms ease-out;
+  }
+  .btn-solid-grad:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(56, 189, 248, 0.35);
+  }
+  [data-theme="light"] .btn-solid-grad {
+    background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+  }
+  [data-theme="light"] .btn-solid-grad:hover {
+    box-shadow: 0 8px 32px rgba(2, 132, 199, 0.28);
+  }
+
+  /* SVG 工程图容器：固定深色面板，图注在容器外随主题（light-mode.md §3.3） */
+  .diagram-frame {
+    border-radius: 12px;
+    border: 1px solid var(--panel-border);
+    background: var(--panel-bg);
+  }
+}
+
+@layer utilities {
+  .font-nums {
+    font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
