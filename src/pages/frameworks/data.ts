@@ -3,7 +3,7 @@
  * （star 为约数，核实于 2026 年中）
  */
 
-export type FilterKey = "all" | "code" | "lowcode" | "multi" | "maintenance";
+export type FilterKey = "all" | "code" | "lowcode" | "multi" | "maintenance" | "msft";
 
 export interface CompareRow {
   name: string;
@@ -12,12 +12,28 @@ export interface CompareRow {
   feature: string;
   audience: string;
   status: { label: string; tone: "green" | "amber" };
+  /** 附加状态徽章（如 MAF 的 `2026.4` 青色徽章），color 为语义色 CSS 变量 */
+  extraStatus?: { label: string; color: string }[];
+  /** 置顶推荐行：bg-2 40% 常驻高亮 + 左侧 2px 青色竖条 */
+  pinned?: boolean;
   /** 点击行滚动到的详情卡锚点 */
   target: string;
   filters: FilterKey[];
 }
 
 export const COMPARE_ROWS: CompareRow[] = [
+  {
+    name: "Microsoft Agent Framework",
+    language: "Python / .NET",
+    vendor: "微软",
+    feature: "AutoGen 编排 + SK 工程化的官方合并体，图式 Workflow，双语言",
+    audience: "微软/Azure 栈、.NET 企业、AutoGen/SK 迁移",
+    status: { label: "1.0 GA", tone: "green" },
+    extraStatus: [{ label: "2026.4", color: "var(--c-perceive)" }],
+    pinned: true,
+    target: "detail-maf",
+    filters: ["code", "multi", "msft"],
+  },
   {
     name: "LangChain",
     language: "Python / JS",
@@ -46,7 +62,7 @@ export const COMPARE_ROWS: CompareRow[] = [
     audience: "研究者、多智能体对话实验",
     status: { label: "维护模式", tone: "amber" },
     target: "detail-autogen",
-    filters: ["code", "multi", "maintenance"],
+    filters: ["code", "multi", "maintenance", "msft"],
   },
   {
     name: "CrewAI",
@@ -96,7 +112,7 @@ export const COMPARE_ROWS: CompareRow[] = [
     audience: "微软/Azure/.NET 企业团队",
     status: { label: "维护模式", tone: "amber" },
     target: "detail-semantic-kernel",
-    filters: ["code", "maintenance"],
+    filters: ["code", "maintenance", "msft"],
   },
   {
     name: "Dify",
@@ -123,6 +139,41 @@ export const COMPARE_ROWS: CompareRow[] = [
 /* ------------------------------------------------------------------ */
 /* 最小示例代码（逐字取自 brief）                                        */
 /* ------------------------------------------------------------------ */
+
+/* MAF 三段代码：逐字取自 research/v2/maf.md（1.0 GA 稳定 API） */
+export const CODE_MAF_QUICKSTART = `# pip install agent-framework   # 1.0 起无需 --pre；Python 3.10+
+# 需环境变量 OPENAI_API_KEY
+import asyncio
+from agent_framework.openai import OpenAIChatClient
+
+def get_weather(city: str) -> str:
+    """查询指定城市的天气。"""
+    return f"{city}：晴，26°C"
+
+async def main():
+    agent = OpenAIChatClient(model="gpt-4o-mini").as_agent(
+        name="WeatherBot",
+        instructions="你是一位简洁的中文助手，回答天气问题时优先调用工具。",
+        tools=[get_weather],
+    )
+    response = await agent.run("北京今天天气怎么样？")
+    print(response.text)
+
+asyncio.run(main())`;
+
+export const CODE_MAF_AZURE = `from agent_framework.azure import AzureOpenAIChatClient
+from azure.identity import AzureCliCredential
+
+agent = AzureOpenAIChatClient(
+    credential=AzureCliCredential(),   # 走 az login 凭据；或用 api_key=...
+    deployment_name="gpt-4o",
+).as_agent(instructions="You are helpful.")`;
+
+export const CODE_MAF_WORKFLOW = `from agent_framework import SequentialBuilder
+
+workflow = SequentialBuilder().participants([writer, reviewer]).build()
+async for event in workflow.run_stream("写一篇 Agent 框架科普"):
+    print(event)`;
 
 export const CODE_LANGCHAIN = `# pip install langchain openai
 from langchain.agents import create_agent
@@ -327,23 +378,92 @@ export interface FrameworkDetail {
   starHero?: boolean;
   status: { label: string; tone: "green" | "amber" };
   lowCode?: boolean;
+  /** 定位句中加粗的前缀（缺省取第一个「，」之前） */
+  boldPrefix?: string;
   positioning: string;
+  /** 语言徽章（如 MAF 的 PYTHON / C#·.NET 一等公民） */
+  langs?: { label: string; note?: string }[];
   concepts: string[];
   scenarios: string;
   pros: string[];
   cons: string[];
-  github: { label: string; url: string }[];
+  /** 一句差异定位（bg-2 小卡，mono 引述） */
+  diffNote?: string;
+  github: { label: string; url: string; meta?: string }[];
   codes: CodeVariant[];
   /** 琥珀色迁移/时效提示行 */
   migrationNote?: string;
+  /** 迁移提示升级为双向锚点卡：点击滚动到该详情卡（青色描边） */
+  migrationTarget?: string;
   /** 高亮行（如 CrewAI 30 分钟亮点） */
   highlight?: string;
 }
 
+/** MAF 血缘关系小图数据（DetailCards 中专属渲染） */
+export const MAF_LINEAGE = {
+  predecessors: [
+    { name: "AutoGen", badge: "维护模式", color: "var(--c-plan)", target: "detail-autogen" },
+    { name: "Semantic Kernel", badge: "维护模式", color: "var(--c-memory)", target: "detail-semantic-kernel" },
+  ],
+  merged: { name: "MAF", badge: "1.0 GA", color: "var(--c-perceive)" },
+  caption: "2025.10 公开预览 · 两支团队合并开发 · 内置两套迁移助手",
+} as const;
+
 export const DETAILS: FrameworkDetail[] = [
   {
-    anchor: "detail-langchain",
+    anchor: "detail-maf",
     number: "01",
+    name: "Microsoft Agent Framework",
+    vendor: "Microsoft · MIT License",
+    stars: [{ repo: "agent-framework", value: "~1.2万" }],
+    status: { label: "1.0 GA", tone: "green" },
+    boldPrefix: "微软官方的统一 Agent 开发框架与运行时",
+    positioning:
+      "微软官方的统一 Agent 开发框架与运行时——将 AutoGen 的多智能体编排与 Semantic Kernel 的企业级地基（类型安全、中间件、可观测性、插件生态）合并为一个开源 SDK，2026.4.3 发布 1.0 GA，稳定 API + 长期支持承诺。",
+    langs: [{ label: "PYTHON" }, { label: "C#/.NET", note: "一等公民" }],
+    concepts: [
+      "ChatAgent",
+      "as_agent()",
+      "Workflow",
+      "SequentialBuilder",
+      "ConcurrentBuilder",
+      "中间件",
+      "Checkpoint",
+      "OpenTelemetry",
+      "MCP / A2A 原生",
+    ],
+    scenarios:
+      "微软/Azure 技术栈团队构建生产级系统 ｜ .NET/C# 企业团队首选 ｜ AutoGen/SK 存量项目官方迁移目标 ｜ 多智能体协作 + 生产级合规兼得。",
+    pros: [
+      "一个 SDK 终结“原型选 AutoGen、生产选 SK”两难",
+      "双语言 + 模型无关（OpenAI/Azure/Anthropic/Bedrock/Gemini/Ollama）",
+      "生产特性齐全（中间件、检查点恢复、OTel、MCP/A2A、Foundry 护栏）",
+      "GA 后 API 稳定 + 内置迁移助手",
+    ],
+    cons: [
+      "年轻框架（约 1.2 万 star，教程案例远少于 LangChain 生态，预览期资料新旧混杂）",
+      "Python 版节奏滞后 .NET 版、子包拆分较细需辨别",
+      "最佳体验依赖 Azure/Foundry 生态",
+      "从 AutoGen/SK 迁移非零成本（对话消息驱动 → 图式工作流需重构设计）",
+    ],
+    diffNote:
+      "LangGraph = 中立编排底座；Agents SDK = OpenAI 生态轻量封装；MAF = 微软生态下“AutoGen 编排 + SK 工程化”的官方合并体——跨语言双栈与企业合规是差异点，生态中立性与社区规模是短板。",
+    github: [
+      {
+        label: "github.com/microsoft/agent-framework",
+        url: "https://github.com/microsoft/agent-framework",
+        meta: "2.1k fork · MIT",
+      },
+    ],
+    codes: [
+      { label: "quickstart.py", filename: "quickstart.py", code: CODE_MAF_QUICKSTART },
+      { label: "azure.py", filename: "azure.py", code: CODE_MAF_AZURE },
+      { label: "workflow.py", filename: "workflow.py", code: CODE_MAF_WORKFLOW },
+    ],
+  },
+  {
+    anchor: "detail-langchain",
+    number: "02",
     name: "LangChain / LangGraph",
     vendor: "LangChain Inc.",
     stars: [
@@ -386,7 +506,7 @@ export const DETAILS: FrameworkDetail[] = [
   },
   {
     anchor: "detail-autogen",
-    number: "02",
+    number: "03",
     name: "Microsoft AutoGen",
     vendor: "微软",
     stars: [{ repo: "autogen", value: "~5.5万" }],
@@ -414,11 +534,13 @@ export const DETAILS: FrameworkDetail[] = [
     ],
     github: [{ label: "microsoft/autogen", url: "https://github.com/microsoft/autogen" }],
     codes: [{ label: "AssistantAgent 最小示例", filename: "autogen_chat.py", code: CODE_AUTOGEN }],
-    migrationNote: "新项目建议转 Microsoft Agent Framework（MAF），社区分支为 AG2。",
+    migrationNote:
+      "官方迁移目标已 GA：见 #01 Microsoft Agent Framework（点击卡片内血缘图可回看本节）。社区分支 AG2 继续活跃。",
+    migrationTarget: "detail-maf",
   },
   {
     anchor: "detail-crewai",
-    number: "03",
+    number: "04",
     name: "CrewAI",
     vendor: "CrewAI Inc.",
     stars: [{ repo: "crewAI", value: "~5万" }],
@@ -445,7 +567,7 @@ export const DETAILS: FrameworkDetail[] = [
   },
   {
     anchor: "detail-agents-sdk",
-    number: "04",
+    number: "05",
     name: "OpenAI Agents SDK",
     vendor: "OpenAI · Swarm 生产级继任者",
     stars: [{ repo: "openai-agents-python", value: "~2.5万" }],
@@ -472,7 +594,7 @@ export const DETAILS: FrameworkDetail[] = [
   },
   {
     anchor: "detail-smolagents",
-    number: "05",
+    number: "06",
     name: "Hugging Face smolagents",
     vendor: "Hugging Face",
     stars: [{ repo: "smolagents", value: "~2.5万" }],
@@ -506,7 +628,7 @@ export const DETAILS: FrameworkDetail[] = [
   },
   {
     anchor: "detail-llamaindex",
-    number: "06",
+    number: "07",
     name: "LlamaIndex",
     vendor: "LlamaIndex Inc.",
     stars: [{ repo: "llama_index", value: "~4.5万" }],
@@ -540,7 +662,7 @@ export const DETAILS: FrameworkDetail[] = [
   },
   {
     anchor: "detail-semantic-kernel",
-    number: "07",
+    number: "08",
     name: "Semantic Kernel",
     vendor: "微软",
     stars: [{ repo: "semantic-kernel", value: "~2.5万" }],
@@ -571,11 +693,13 @@ export const DETAILS: FrameworkDetail[] = [
       { label: "microsoft/semantic-kernel", url: "https://github.com/microsoft/semantic-kernel" },
     ],
     codes: [{ label: "Kernel + Plugin 最小示例", filename: "semantic_kernel.py", code: CODE_SEMANTIC_KERNEL }],
-    migrationNote: "已进入维护模式，新项目建议直接评估 Microsoft Agent Framework（MAF）。",
+    migrationNote:
+      "已进入维护模式。官方迁移目标已 GA：见 #01 Microsoft Agent Framework（点击卡片内血缘图可回看本节）。",
+    migrationTarget: "detail-maf",
   },
   {
     anchor: "detail-dify",
-    number: "08",
+    number: "09",
     name: "Dify",
     vendor: "LangGenius",
     stars: [{ repo: "dify", value: "~14万" }],
@@ -603,7 +727,7 @@ export const DETAILS: FrameworkDetail[] = [
   },
   {
     anchor: "detail-coze",
-    number: "09",
+    number: "10",
     name: "Coze 扣子",
     vendor: "字节跳动",
     stars: [{ repo: "coze-studio", value: "开源数日破万 · 数万" }],
@@ -633,9 +757,14 @@ export const DETAILS: FrameworkDetail[] = [
   },
 ];
 
-/** 收口速查表（brief §十一 一句话总结） */
-export const CHEATSHEET =
-  "入门摸原理 smolagents / Agents SDK ｜ 上线扛流量 LangGraph ｜ 团队流水线 CrewAI ｜ 知识库 LlamaIndex ｜ 微软系看 MAF ｜ 不写代码 Dify（私有化）/ Coze（国内）";
+/** 收口速查表（maf-card.md §5：MAF 片段加粗 + 青色） */
+export const CHEATSHEET_SEGMENTS: { text: string; accent?: boolean }[] = [
+  {
+    text: "入门摸原理 smolagents / Agents SDK ｜ 上线扛流量 LangGraph ｜ 团队流水线 CrewAI ｜ 知识库 LlamaIndex ｜ ",
+  },
+  { text: "微软系/.NET 直接上 MAF（2026.4 GA）", accent: true },
+  { text: " ｜ 不写代码 Dify（私有化）/ Coze（国内）" },
+];
 
 /* ------------------------------------------------------------------ */
 /* S4 选型向导（brief §十一）                                            */
@@ -696,13 +825,15 @@ export const SELECTOR_TABS: SelectorTab[] = [
         reason: "OpenAI 生态内的生产捷径（Guardrail + Tracing 开箱即用）。",
       },
       {
+        name: "Microsoft Agent Framework",
+        target: "detail-maf",
+        reason:
+          "2026.4 GA 后 API 稳定 + LTS 承诺；微软/Azure/.NET 栈团队可直接列为首选，检查点恢复 + OTel + Foundry 护栏开箱即用。",
+      },
+      {
         name: "CrewAI（Crew + Flow）",
         target: "detail-crewai",
         reason: "角色分工清晰的业务流水线，工程确定性靠 Flow 兜底。",
-      },
-      {
-        name: "Microsoft Agent Framework",
-        reason: "微软/.NET 企业直接上 MAF——AutoGen、Semantic Kernel 已进维护模式，不建议新项目押注。",
       },
     ],
   },
@@ -714,7 +845,8 @@ export const SELECTOR_TABS: SelectorTab[] = [
       {
         name: "AutoGen / AG2",
         target: "detail-autogen",
-        reason: "多 Agent 对话范式的经典实现，论文引用多；新项目可看社区分支 AG2。",
+        reason:
+          "多 Agent 对话范式的经典实现，论文引用多；新项目可看社区分支 AG2。（已进维护模式，新项目评估 MAF）",
       },
       {
         name: "smolagents",
