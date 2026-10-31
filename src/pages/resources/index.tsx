@@ -202,7 +202,7 @@ export default function ResourcesPage() {
             { value: 8, label: "Awesome 仓库" },
             { value: 10, label: "免费课程" },
             { value: 9, label: "经典论文" },
-            { value: 8, label: "博客与文档" },
+            { value: 9, label: "博客与文档" },
           ].map((s) => (
             <div key={s.label}>
               <CountUp value={s.value} />

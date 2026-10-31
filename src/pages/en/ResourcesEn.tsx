@@ -204,7 +204,7 @@ export default function ResourcesEn() {
             { value: 8, label: "Awesome Repos" },
             { value: 10, label: "Free Courses" },
             { value: 9, label: "Classic Papers" },
-            { value: 8, label: "Blogs & Docs" },
+            { value: 9, label: "Blogs & Docs" },
           ].map((s) => (
             <div key={s.label}>
               <CountUp value={s.value} />

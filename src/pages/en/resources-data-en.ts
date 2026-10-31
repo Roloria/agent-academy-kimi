@@ -293,4 +293,10 @@ export const BLOGS_EN: BlogEn[] = [
     url: "https://www.tavily.com/",
     desc: "A search API built for agents",
   },
+  {
+    title: "agent-qa Coding Agent Testing Workflow Docs",
+    source: "vostride.com",
+    url: "https://vostride.com/docs/agent-qa/guides/coding-agent-workflow",
+    desc: "Verify web and mobile changes through MCP, inspect evidence and rerun fixes; the tool provides memidex persistent memory and validated self-improvement.",
+  },
 ];
