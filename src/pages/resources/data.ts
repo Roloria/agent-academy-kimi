@@ -1,6 +1,6 @@
 /**
- * 资源导航数据 —— 名称、说明、链接逐字取自
- * research/learning-path.md §四（链接已核实）。
+ * 资源导航数据 —— 既有条目来自 research/learning-path.md §四；
+ * 新增条目依据各自官方文档（链接已核实）。
  */
 
 export type StageKey = "阶段 1" | "阶段 2" | "阶段 3" | "阶段 4";
@@ -291,5 +291,11 @@ export const BLOGS: Blog[] = [
     source: "tavily.com",
     url: "https://www.tavily.com/",
     desc: "Agent 搜索 API",
+  },
+  {
+    title: "agent-qa 编码智能体测试工作流文档",
+    source: "vostride.com",
+    url: "https://vostride.com/docs/agent-qa/guides/coding-agent-workflow",
+    desc: "通过 MCP 验证网页与移动端改动、检查证据并复验修复；工具提供 memidex 持久记忆与经验证的自我改进。",
   },
 ];
